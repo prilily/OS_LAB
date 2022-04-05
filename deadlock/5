@@ -1,0 +1,42 @@
+//add 0 for 5 consective 1s which is flag hence diffrentiate data
+// move L to R
+#include<bits/stdc++.h>
+using namespace std;
+
+int main()
+{
+    string data="";
+    int n;
+    cout<<"-----Enter size of data-----"<<endl;
+    cin>>n;
+    cout<<"-----Enter sequence of"<< n<<" digit binary numbers :"<<endl;
+    for(int i=0;i<n;i++)
+    {
+        string temp;
+        cin>>temp;
+        data.append(temp);
+    }
+
+    int i=0,count=0;
+    while(i<data.size())
+    {
+        if(data[i]=='1')
+        {
+            i++;
+            count++;
+            if(count==5)
+            {
+                data.insert(i,"-> 0 <-");
+                i++;
+            }
+        }
+        else{
+            i++;
+            count=0;
+        }
+        
+    }
+    
+    cout<<" data after bit stuffing is \n";
+    cout<<data;
+}
