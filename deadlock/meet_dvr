@@ -1,0 +1,59 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+int bellman_ford(int g[100][100],int V,int e,int edge[100][2])
+{
+    int i,u,v,k,distance[100],source,flag=1;
+    for(int i=0;i<V;i++)
+       distance[i]=1000;
+
+    cout<<"Enter source ";
+    cin>>source;
+    distance[source-1]=0;
+
+
+    for(int i=0;i<V-1;i++){
+        for(int k=0;k<e;k++){
+            u=edge[k][0];
+            v=edge[k][1];
+            if(distance[v]>distance[u]+g[u][v])
+                distance[v]=distance[u]+g[u][v];
+        }
+    }
+
+    for(int k=0;k<e;k++){
+    u=edge[k][0];
+    v=edge[k][1];
+    if(distance[v]>distance[u]+g[u][v])
+        flag=0;
+    }
+    if(flag){
+        for(int i=0;i<V;i++){
+            cout<<"\n Distance from source "<<source<<" to vertex "<<i+1<<" = "<<distance[i];
+        }
+    }
+    return flag;
+}
+
+int main()
+{
+    int v,edge[100][2],g[100][100];
+    cout<<"Enter no of vertices ";
+    cin>>v;
+    cout<<"\nEnter matrix value of graph ";
+    int k=0;
+    for(int i=0;i<v;i++){
+        for(int j=0;j<v;j++)
+        {   cin>>g[i][j];
+            if(g[i][j]!=0){
+                edge[k][0]=i;
+                edge[k++][1]=j;
+            }
+        }
+    }
+    if(bellman_ford(g,v,k,edge))
+    {
+        cout<<"\nNo negative weight cycle exists\n";
+    }
+    return 0;
+}
